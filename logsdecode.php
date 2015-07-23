@@ -19,9 +19,9 @@ class LogsDecode
     {
         $i = 1;
         $this->_file = fopen($this->_fileName,'r');
+        $pattern = '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$';
         while(!feof($this->_file)){
             $buffer = fgets($this->_file);
-            $pattern = '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$';
             $res = preg_grep($pattern,$buffer);
             try{
                 $this->save(implode(' ',[$res,$i++]));
